@@ -18,12 +18,17 @@ charges from a person's age, BMI, number of children, gender, smoking status,
 and region. The fitted model is a multiple **Linear Regression** model, and the
 interactive prediction application is built with **Gradio**.
 
+The live Hugging Face deployment uses a dependency-free static interface because
+new server-hosted Gradio Spaces require a paid plan. It evaluates the exact
+intercept and coefficients exported from the same fitted model; the original
+Gradio `app.py` and both `.pkl` artifacts remain included for reproduction.
+
 > This is an educational demonstration. Its estimates are not medical,
 > financial, or insurance advice.
 
 ## Live project
 
-- **Application:** HUGGING_FACE_SPACE_URL
+- **Application:** https://huggingface.co/spaces/TalalNasir/medical-insurance-cost-prediction
 - **Source code:** https://github.com/TalalNasir1/medical-insurance-cost-prediction
 - **Complete notebook:**
   [`notebooks/Medical_Insurance_Cost_Prediction.ipynb`](notebooks/Medical_Insurance_Cost_Prediction.ipynb)
@@ -182,6 +187,9 @@ medical-insurance-cost-prediction/
 ├── runtime.txt
 ├── README.md
 ├── LICENSE
+├── huggingface_space/
+│   ├── index.html
+│   └── README.md
 ├── data/
 │   └── insurance.csv
 ├── notebooks/
@@ -218,16 +226,19 @@ Open `http://127.0.0.1:7860` in a browser.
 
 ## Deploy to Hugging Face Spaces
 
-1. Create a new Space and select **Gradio** as the SDK.
-2. Upload or push the repository files to the Space.
-3. Keep `app.py`, both `.pkl` files, `requirements.txt`, and this README at the
-   repository root.
-4. Wait for the Space status to become **Running**.
-5. Test both documented prediction cases and add the final Space URL above.
+The published free deployment uses the files in `huggingface_space/`:
 
-The exact model environment is pinned in `requirements.txt`. If the model is
-exported again from a different Colab environment, update the version pins to
-match the new `model_metadata.json`.
+1. Create a **Static** Space and select the blank template.
+2. Upload `huggingface_space/index.html` as the root `index.html` and
+   `huggingface_space/README.md` as the root `README.md`.
+3. Upload `insurance_model.pkl`, `feature_columns.pkl`, and
+   `model_metadata.json` so the exact original artifacts remain available.
+4. Wait for the Space status to become **Running**, then verify both documented
+   prediction cases.
+
+For a paid server-hosted Space, select **Gradio** instead and upload `app.py`,
+both `.pkl` files, `requirements.txt`, and the project README. The exact local
+model environment is pinned in `requirements.txt`.
 
 ## Limitations
 

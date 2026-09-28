@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medical Insurance Cost Predictor</title>
+  <meta name="description" content="Insurance cost prediction using the exact fitted Linear Regression model.">
+  <style>
+    :root{color-scheme:dark;font-family:Inter,system-ui,sans-serif}*{box-sizing:border-box}
+    body{margin:0;min-height:100vh;color:#e5e7eb;background:radial-gradient(circle at top,#172554 0,#0b1020 45%,#070b16 100%)}
+    main{width:min(1050px,calc(100% - 32px));margin:auto;padding:42px 0}.hero{text-align:center;margin-bottom:24px}
+    h1{margin:0;color:#fff;font-size:clamp(2rem,5vw,3.15rem);letter-spacing:-.04em}.subtitle{color:#b8c4dc;font-size:1.05rem}
+    .status{display:inline-block;padding:8px 14px;color:#86efac;background:#052e16;border:1px solid #166534;border-radius:999px;font-weight:750}
+    .card{padding:26px;background:#111827ee;border:1px solid #334155;border-radius:20px;box-shadow:0 24px 70px #0007}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px 24px}label,legend{display:block;color:#f8fafc;font-weight:750;margin-bottom:8px}
+    input,select{width:100%;height:48px;padding:0 13px;color:#f8fafc;background:#1e293b;border:1px solid #475569;border-radius:10px;font:inherit}
+    input:focus,select:focus{outline:2px solid #818cf8;border-color:transparent}fieldset{margin:0;padding:0;border:0}.radios{display:flex;gap:10px}
+    .radios label{flex:1;margin:0;padding:12px;text-align:center;background:#1e293b;border:1px solid #475569;border-radius:10px;cursor:pointer}
+    .radios label:has(input:checked){background:#4338ca;border-color:#818cf8}.radios input{width:auto;height:auto;margin-right:6px}
+    .predict{width:100%;margin-top:26px;padding:15px;color:#fff;background:linear-gradient(90deg,#4f46e5,#7c3aed);border:0;border-radius:11px;font:800 1.03rem inherit;cursor:pointer}
+    .result{margin-top:18px;min-height:72px;display:grid;place-items:center;padding:18px;color:#bfdbfe;background:#0f172a;border:1px solid #334155;border-radius:12px;font-size:clamp(1.15rem,3vw,1.65rem);font-weight:850}
+    .examples{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.example{padding:9px 13px;color:#c7d2fe;background:#1e1b4b;border:1px solid #4338ca;border-radius:9px;cursor:pointer}
+    .note{margin-top:18px;color:#94a3b8;text-align:center;font-size:.88rem}@media(max-width:720px){.grid{grid-template-columns:1fr}.card{padding:20px}}
+  </style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <h1>🏥 Medical Insurance Cost Predictor</h1>
+    <p class="subtitle">Enter the applicant's details to estimate annual medical insurance charges.</p>
+    <div class="status">✓ Exact fitted Linear Regression model loaded</div>
+  </header>
+  <section class="card" aria-label="Insurance prediction form">
+    <div class="grid">
+      <div><label for="age">Age</label><input id="age" type="number" min="18" max="64" step="1" value="30"></div>
+      <div><label for="bmi">BMI</label><input id="bmi" type="number" min="15.9" max="53.2" step="0.1" value="25"></div>
+      <div><label for="children">Number of Children</label><input id="children" type="number" min="0" max="5" step="1" value="0"></div>
+      <fieldset><legend>Gender</legend><div class="radios"><label><input type="radio" name="gender" value="Female" checked>Female</label><label><input type="radio" name="gender" value="Male">Male</label></div></fieldset>
+      <fieldset><legend>Smoker</legend><div class="radios"><label><input type="radio" name="smoker" value="No" checked>No</label><label><input type="radio" name="smoker" value="Yes">Yes</label></div></fieldset>
+      <div><label for="region">Region</label><select id="region"><option>Northeast</option><option>Northwest</option><option>Southeast</option><option>Southwest</option></select></div>
+    </div>
+    <button class="predict" id="predict">Predict Insurance Cost</button>
+    <output class="result" id="result" aria-live="polite">Enter details and select Predict Insurance Cost</output>
+    <div class="examples"><button class="example" data-case="1">Example 1: non-smoker</button><button class="example" data-case="2">Example 2: smoker</button></div>
+  </section>
+  <p class="note">Educational demonstration only. This estimate is not medical, financial, or insurance advice.</p>
+</main>
+<script>
+  const intercept=-11092.65229594595;
+  const coefficients=[248.21072022470446,318.70144095235077,533.009988798697,-101.54205399029631,23077.764592868083,-391.7614547836092,-838.9196157269652,-659.1397515529586];
+  const byId=id=>document.getElementById(id),chosen=name=>document.querySelector(`input[name="${name}"]:checked`).value;
+  function predict(){
+    const age=Number(byId("age").value),bmi=Number(byId("bmi").value),children=Number(byId("children").value);
+    if(!Number.isFinite(age)||!Number.isFinite(bmi)||!Number.isFinite(children)||age<18||age>64||bmi<15.9||bmi>53.2||children<0||children>5){byId("result").textContent="Please enter values within the displayed ranges.";return}
+    const gender=chosen("gender"),smoker=chosen("smoker"),region=byId("region").value;
+    const x=[age,bmi,children,gender==="Male"?1:0,smoker==="Yes"?1:0,region==="Northwest"?1:0,region==="Southeast"?1:0,region==="Southwest"?1:0];
+    const estimate=x.reduce((sum,value,i)=>sum+value*coefficients[i],intercept);
+    byId("result").textContent=`Estimated Insurance Cost: $${estimate.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+  }
+  function radio(name,value){document.querySelector(`input[name="${name}"][value="${value}"]`).checked=true}
+  document.querySelectorAll(".example").forEach(button=>button.addEventListener("click",()=>{if(button.dataset.case==="1"){byId("age").value=25;byId("bmi").value=22.5;byId("children").value=0;radio("gender","Female");radio("smoker","No");byId("region").value="Northeast"}else{byId("age").value=45;byId("bmi").value=31.2;byId("children").value=2;radio("gender","Male");radio("smoker","Yes");byId("region").value="Southeast"}predict()}));
+  byId("predict").addEventListener("click",predict);
+</script>
+</body>
+</html>
