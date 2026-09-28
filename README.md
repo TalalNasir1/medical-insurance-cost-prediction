@@ -24,7 +24,7 @@ interactive prediction application is built with **Gradio**.
 ## Live project
 
 - **Application:** HUGGING_FACE_SPACE_URL
-- **Source code:** GITHUB_REPOSITORY_URL
+- **Source code:** https://github.com/TalalNasir1/medical-insurance-cost-prediction
 - **Complete notebook:**
   [`notebooks/Medical_Insurance_Cost_Prediction.ipynb`](notebooks/Medical_Insurance_Cost_Prediction.ipynb)
 
