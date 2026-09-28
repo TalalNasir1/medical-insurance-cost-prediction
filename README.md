@@ -168,6 +168,30 @@ The inputs and results are also saved in
 ![Prediction test case 2](screenshots/05-prediction-test-case-2.png)
 
 
+## LinkedIn project showcase
+
+The completed project is published as a professional LinkedIn portfolio post:
+
+- **Published post:** https://www.linkedin.com/feed/update/urn:li:activity:7510427083039408128/
+- **Final post copy:** [`linkedin/LinkedIn_Post.md`](linkedin/LinkedIn_Post.md)
+- **Showcase media:** [`linkedin/media/`](linkedin/media/)
+- **Submission proof:** [`linkedin/proof/`](linkedin/proof/)
+
+The post explains the real-world problem, dataset, preprocessing, Multiple
+Linear Regression model, exact test results, technologies, limitations, GitHub
+repository, and live Hugging Face deployment. Four purpose-built images present
+the application, evaluation, feature insights, and project links.
+
+### LinkedIn screenshot evidence
+
+![Published LinkedIn post](linkedin/proof/01-linkedin-published-post.png)
+
+![Complete results and links](linkedin/proof/03-complete-post-links.png)
+
+![Attached project media](linkedin/proof/04-attached-media-and-status.png)
+
+![Visible engagement status](linkedin/proof/05-publication-engagement-status.png)
+
 ## Project structure
 
 ```text
@@ -197,13 +221,27 @@ medical-insurance-cost-prediction/
 │   ├── application_test_cases.csv
 │   ├── evaluation_summary.json
 │   └── test_predictions.csv
-└── screenshots/
+├── screenshots/
     ├── 01-github-repository.png
     ├── 02-readme.png
     ├── 03-deployed-application.png
     ├── 04-prediction-test-case-1.png
     ├── 05-prediction-test-case-2.png
     └── 06-project-structure.png
+└── linkedin/
+    ├── LinkedIn_Post.md
+    ├── media/
+    │   ├── 01-project-overview.png
+    │   ├── 02-model-results.png
+    │   ├── 03-feature-insights.png
+    │   └── 04-repository-and-deployment.png
+    └── proof/
+        ├── 01-linkedin-published-post.png
+        ├── 02-complete-post-top.png
+        ├── 03-complete-post-links.png
+        ├── 04-attached-media-and-status.png
+        ├── 05-publication-engagement-status.png
+        └── README.md
 ```
 
 ## Run locally
