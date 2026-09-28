@@ -167,13 +167,6 @@ The inputs and results are also saved in
 
 ![Prediction test case 2](screenshots/05-prediction-test-case-2.png)
 
-### GitHub repository, README, and final structure
-
-![GitHub repository](screenshots/01-github-repository.png)
-
-![Rendered README](screenshots/02-readme.png)
-
-![Final project structure](screenshots/06-project-structure.png)
 
 ## Project structure
 
