@@ -1,0 +1,28 @@
+{
+  "model": "LinearRegression",
+  "feature_columns": [
+    "age",
+    "bmi",
+    "children",
+    "sex_male",
+    "smoker_yes",
+    "region_northwest",
+    "region_southeast",
+    "region_southwest"
+  ],
+  "test_size": 0.2,
+  "random_state": 42,
+  "rows_after_duplicate_removal": 1337,
+  "metrics": {
+    "MAE": 4177.045561036319,
+    "MSE": 35478020.67523561,
+    "RMSE": 5956.342894363588,
+    "R2": 0.8069287081198011
+  },
+  "versions": {
+    "scikit-learn": "1.6.1",
+    "pandas": "2.2.3",
+    "numpy": "2.1.3",
+    "joblib": "1.6.0"
+  }
+}

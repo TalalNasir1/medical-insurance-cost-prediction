@@ -1,0 +1,3 @@
+age,bmi,children,gender,smoker,region,predicted_cost
+25,22.5,0,Female,No,Northeast,2283.4
+45,31.2,2,Male,Yes,Southeast,33223.64
